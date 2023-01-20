@@ -1,7 +1,6 @@
 "use strict";
 
 const { sqlForPartialUpdate } = require("./sql");
-const { BadRequestError } = require("../expressError");
 
 describe("sqlForPartialUpdate", function () {
   it("works for 1 item", function () {

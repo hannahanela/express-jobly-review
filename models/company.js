@@ -49,6 +49,46 @@ class Company {
     return company;
   }
 
+  /** Create WHERE clause for filter data. Used by methods that query with
+   *    filters.
+   * 
+   * Valid filters (all optional):
+   * - name
+   * - minEmployees
+   * - maxEmployees
+   * 
+   * Returns {
+   *  whereClause: "WHERE name ILIKE $1 AND num_employees >= $2",
+   *  values: ['%Yahoo%', 50]
+   * }
+   */
+
+  static _filterWhereBuilder({ name, minEmployees, maxEmployees }) {
+    let whereFragments = [];
+    let values = [];
+
+    if (name !== undefined) {
+      whereFragments.push(`name ILIKE $${values.length}`);
+      values.push(`%${name}%`);
+    }
+
+    if (minEmployees !== undefined) {
+      whereFragments.push(`num_employees <=$${values.length}`);
+      values.push(`${minEmployees}`);
+    }
+
+    if (maxEmployees !== undefined) {
+      whereFragments.push(`num_employees >=$${values.length}`);
+      values.push(`${maxEmployees}`);
+    }
+
+    let whereClause = (whereFragments.length > 0) ?
+      "WHERE " + whereFragments.join(" AND ")
+      : "";
+    
+    return { whereClause, values};
+  }
+
   /** Find all companies.
    *
    * Returns [{ handle, name, description, numEmployees, logoUrl }, ...]

@@ -85,6 +85,117 @@ describe("findAll", function () {
       },
     ]);
   });
+
+  test("works: all three filters", async function () {
+    let companies = await Company.findAll("c", 2, 3);
+    expect(companies).toEqual([
+      {
+        handle: "c2",
+        name: "C2",
+        description: "Desc2",
+        numEmployees: 2,
+        logoUrl: "http://c2.img",
+      },
+    ]);
+  });
+
+  test("works: filters by name", async function () {
+    // FIXME: null values for min max
+    let companies = await Company.findAll("1");
+    expect(companies).toEqual([
+      {
+        handle: "c1",
+        name: "C1",
+        description: "Desc1",
+        numEmployees: 1,
+        logoUrl: "http://c1.img",
+      },
+    ]);
+  });
+
+  test("works: filters by minEmployees", async function () {
+    // TODO: add inputs for name (null), min=3, and max (null)
+    let companies = await Company.findAll()
+    expect(companies).toEqual([
+      {
+        handle: "c3",
+        name: "C3",
+        description: "Desc3",
+        numEmployees: 3,
+        logoUrl: "http://c3.img",
+      },
+    ]);
+  });
+
+  test("works: filters by maxEmployees", async function () {
+    // TODO: add inputs for name (null), min (null), and max=1
+    let companies = await Company.findAll()
+    expect(companies).toEqual([
+      {
+        handle: "c1",
+        name: "C1",
+        description: "Desc1",
+        numEmployees: 1,
+        logoUrl: "http://c1.img",
+      },
+    ]);
+  });
+
+  test("works: filters by name and minEmployees", async function () {
+    // TODO: add inputs name="c", min=2, max=null
+    let companies = await Company.findAll()
+    expect(companies).toEqual([
+      {
+        handle: "c2",
+        name: "C2",
+        description: "Desc2",
+        numEmployees: 2,
+        logoUrl: "http://c2.img",
+      },
+      {
+        handle: "c3",
+        name: "C3",
+        description: "Desc3",
+        numEmployees: 3,
+        logoUrl: "http://c3.img",
+      },
+    ]);
+  });
+
+  test("works: filters by name and maxEmployees", async function () {
+    // TODO: add inputs name="c", min=null, max=2
+    let companies = await Company.findAll()
+    expect(companies).toEqual([
+      {
+        handle: "c1",
+        name: "C1",
+        description: "Desc1",
+        numEmployees: 1,
+        logoUrl: "http://c1.img",
+      },
+      {
+        handle: "c2",
+        name: "C2",
+        description: "Desc2",
+        numEmployees: 2,
+        logoUrl: "http://c2.img",
+      },
+    ]);
+  });
+
+  test("works: filters by minEmployees and mixEmployees", async function () {
+    // TODO: add inputs name=null, min=2, max=2
+    let companies = await Company.findAll()
+    expect(companies).toEqual([
+      {
+        handle: "c2",
+        name: "C2",
+        description: "Desc2",
+        numEmployees: 2,
+        logoUrl: "http://c2.img",
+      },
+    ]);
+  });
 });
 
 /************************************** get */

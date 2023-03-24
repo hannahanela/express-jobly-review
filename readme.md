@@ -2,10 +2,13 @@
 
 This is the Express backend for Jobly, version 2.
 
-To run this:
+# Installation
+    git clone git@github.com:hannahanela/express-jobly-review.git
+
+# To run example server:
 
     node server.js
     
-To run the tests:
+# To run tests:
 
     jest -i
